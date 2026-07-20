@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Menu, X, Zap } from 'lucide-react';
 import styles from './MarketingNav.module.css';
@@ -52,6 +53,9 @@ export default function MarketingNav() {
     return () => { document.body.style.overflow = ''; };
   }, [mobileOpen]);
 
+  const pathname = usePathname();
+  const isActiveLink = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
+
   return (
     <>
       <nav
@@ -70,12 +74,18 @@ export default function MarketingNav() {
 
           {/* Desktop Nav Links */}
           <div className={styles.links} ref={dropdownRef}>
-            <Link href="/product" className={styles.navLink}>Product</Link>
+            <Link
+              href="/product"
+              className={`${styles.navLink} ${isActiveLink('/product') ? styles.navLinkActive : ''}`}
+              aria-current={isActiveLink('/product') ? 'page' : undefined}
+            >
+              Product
+            </Link>
 
             {/* Solutions Dropdown */}
             <div className={styles.dropdownWrapper}>
               <button
-                className={`${styles.navLink} ${styles.dropdownTrigger} ${openDropdown === 'solutions' ? styles.dropdownOpen : ''}`}
+                className={`${styles.navLink} ${styles.dropdownTrigger} ${openDropdown === 'solutions' ? styles.dropdownOpen : ''} ${isActiveLink('/solutions') ? styles.navLinkActive : ''}`}
                 onClick={() => setOpenDropdown(openDropdown === 'solutions' ? null : 'solutions')}
                 aria-expanded={openDropdown === 'solutions'}
                 aria-haspopup="true"
@@ -116,7 +126,7 @@ export default function MarketingNav() {
             {/* Industries Dropdown */}
             <div className={styles.dropdownWrapper}>
               <button
-                className={`${styles.navLink} ${styles.dropdownTrigger} ${openDropdown === 'industries' ? styles.dropdownOpen : ''}`}
+                className={`${styles.navLink} ${styles.dropdownTrigger} ${openDropdown === 'industries' ? styles.dropdownOpen : ''} ${isActiveLink('/industries') ? styles.navLinkActive : ''}`}
                 onClick={() => setOpenDropdown(openDropdown === 'industries' ? null : 'industries')}
                 aria-expanded={openDropdown === 'industries'}
                 aria-haspopup="true"
@@ -153,8 +163,20 @@ export default function MarketingNav() {
               </AnimatePresence>
             </div>
 
-            <Link href="/pricing" className={styles.navLink}>Pricing</Link>
-            <Link href="/resources/market-index" className={styles.navLink}>Market Index</Link>
+            <Link
+              href="/pricing"
+              className={`${styles.navLink} ${isActiveLink('/pricing') ? styles.navLinkActive : ''}`}
+              aria-current={isActiveLink('/pricing') ? 'page' : undefined}
+            >
+              Pricing
+            </Link>
+            <Link
+              href="/resources/market-index"
+              className={`${styles.navLink} ${isActiveLink('/resources/market-index') ? styles.navLinkActive : ''}`}
+              aria-current={isActiveLink('/resources/market-index') ? 'page' : undefined}
+            >
+              Market Index
+            </Link>
           </div>
 
           {/* CTA Group */}
@@ -189,21 +211,49 @@ export default function MarketingNav() {
             transition={{ duration: 0.2 }}
           >
             <div className={styles.mobileLinks}>
-              <Link href="/product" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>Product</Link>
+              <Link
+                href="/product"
+                className={`${styles.mobileLink} ${isActiveLink('/product') ? styles.mobileLinkActive : ''}`}
+                onClick={() => setMobileOpen(false)}
+              >
+                Product
+              </Link>
               <div className={styles.mobileDivider}>Solutions</div>
               {solutions.map((item) => (
-                <Link key={item.href} href={item.href} className={styles.mobileLinkIndented} onClick={() => setMobileOpen(false)}>
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`${styles.mobileLinkIndented} ${isActiveLink(item.href) ? styles.mobileLinkActive : ''}`}
+                  onClick={() => setMobileOpen(false)}
+                >
                   {item.label}
                 </Link>
               ))}
               <div className={styles.mobileDivider}>Industries</div>
               {industries.map((item) => (
-                <Link key={item.href} href={item.href} className={styles.mobileLinkIndented} onClick={() => setMobileOpen(false)}>
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`${styles.mobileLinkIndented} ${isActiveLink(item.href) ? styles.mobileLinkActive : ''}`}
+                  onClick={() => setMobileOpen(false)}
+                >
                   {item.label}
                 </Link>
               ))}
-              <Link href="/pricing" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>Pricing</Link>
-              <Link href="/resources/market-index" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>Market Index</Link>
+              <Link
+                href="/pricing"
+                className={`${styles.mobileLink} ${isActiveLink('/pricing') ? styles.mobileLinkActive : ''}`}
+                onClick={() => setMobileOpen(false)}
+              >
+                Pricing
+              </Link>
+              <Link
+                href="/resources/market-index"
+                className={`${styles.mobileLink} ${isActiveLink('/resources/market-index') ? styles.mobileLinkActive : ''}`}
+                onClick={() => setMobileOpen(false)}
+              >
+                Market Index
+              </Link>
             </div>
             <div className={styles.mobileCtas}>
               <Link href="/login" className={styles.mobileSignIn} onClick={() => setMobileOpen(false)}>Sign In</Link>

@@ -95,79 +95,98 @@ const STAGE_ICONS = [Upload, ScanLine, Tag, TrendingUp, Users, CheckCircle2];
 
 /* ── Timing constants ──────────────────────────────────────────── */
 const TICK_MS   = 820;   // ms between each stage reveal
-const CYCLE_MS  = 17000; // ms before switching to next material
+const CYCLE_MIN = 15000;
+const CYCLE_MAX = 20000;
 const FADE_MS   = 350;   // crossfade duration
 
+function getCycleDelay() {
+  return Math.round(CYCLE_MIN + Math.random() * (CYCLE_MAX - CYCLE_MIN));
+}
+
 export default function MaterialFlowViz() {
-  const [matIdx,    setMatIdx]    = useState(0);
+  const [matIdx, setMatIdx] = useState(0);
   const [activeIdx, setActiveIdx] = useState(-1);
   const [completed, setCompleted] = useState(false);
-  const [fading,    setFading]    = useState(false);
+  const [fading, setFading] = useState(false);
 
-  const cancelRef = useRef(false);
-  const timerRef  = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const isCancelled = useRef(false);
+  const stageTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const cycleTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const currentIndex = useRef(0);
 
-  const sleep = (ms: number) =>
-    new Promise<void>((res) => { timerRef.current = setTimeout(res, ms); });
+  const clearTimers = useCallback(() => {
+    if (stageTimer.current) clearTimeout(stageTimer.current);
+    if (cycleTimer.current) clearTimeout(cycleTimer.current);
+  }, []);
 
-  /* ── Animate one full workflow ─────────────────────────────── */
+  const scheduleCycle = useCallback(() => {
+    clearTimers();
+    cycleTimer.current = setTimeout(() => {
+      if (isCancelled.current) return;
+      cycleToNext();
+    }, getCycleDelay());
+  }, [clearTimers]);
+
   const runWorkflow = useCallback(async (idx: number) => {
-    cancelRef.current = false;
+    isCancelled.current = false;
+    clearTimers();
+    setFading(false);
     setCompleted(false);
     setActiveIdx(-1);
 
     const mat = MATERIALS[idx];
-    for (let i = 0; i < mat.stages.length; i++) {
-      await sleep(i === 0 ? 500 : TICK_MS);
-      if (cancelRef.current) return;
+    for (let i = 0; i < mat.stages.length; i += 1) {
+      await new Promise<void>((resolve) => {
+        stageTimer.current = setTimeout(resolve, i === 0 ? 500 : TICK_MS);
+      });
+      if (isCancelled.current) return;
       setActiveIdx(i);
     }
-    if (!cancelRef.current) setCompleted(true);
-  }, []);
 
-  /* ── Cycle to next material with crossfade ─────────────────── */
+    if (isCancelled.current) return;
+    setCompleted(true);
+    scheduleCycle();
+  }, [clearTimers, scheduleCycle]);
+
   const cycleToNext = useCallback(async () => {
-    cancelRef.current = true;
-    clearTimeout(timerRef.current);
+    isCancelled.current = true;
+    clearTimers();
     setFading(true);
-    await sleep(FADE_MS);
-    setFading(false);
-    setMatIdx((prev) => {
-      const next = (prev + 1) % MATERIALS.length;
-      return next;
+
+    await new Promise<void>((resolve) => {
+      stageTimer.current = setTimeout(resolve, FADE_MS);
     });
-  }, []);
 
-  /* ── On matIdx change: run workflow then schedule next cycle ── */
-  useEffect(() => {
-    cancelRef.current = false;
+    setFading(false);
+    const nextIndex = (currentIndex.current + 1) % MATERIALS.length;
+    currentIndex.current = nextIndex;
+    setMatIdx(nextIndex);
+    setActiveIdx(MATERIALS[nextIndex].stages.length - 1);
+    setCompleted(true);
+    scheduleCycle();
+  }, [clearTimers, scheduleCycle]);
 
-    async function go() {
-      await runWorkflow(matIdx);
-      if (cancelRef.current) return;
-      // Wait before cycling to next material
-      await sleep(CYCLE_MS);
-      if (!cancelRef.current) cycleToNext();
-    }
-
-    go();
-
-    return () => {
-      cancelRef.current = true;
-      clearTimeout(timerRef.current);
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [matIdx]);
-
-  /* ── Replay on hover/click ─────────────────────────────────── */
   const handleReplay = useCallback(() => {
-    cancelRef.current = true;
-    clearTimeout(timerRef.current);
+    if (!completed || fading) return;
+    isCancelled.current = true;
+    clearTimers();
+    setFading(false);
     setCompleted(false);
     setActiveIdx(-1);
-    // Small delay then re-run
-    timerRef.current = setTimeout(() => runWorkflow(matIdx), 80);
-  }, [matIdx, runWorkflow]);
+    stageTimer.current = setTimeout(() => runWorkflow(currentIndex.current), 80);
+  }, [clearTimers, completed, fading, runWorkflow]);
+
+  useEffect(() => {
+    currentIndex.current = matIdx;
+  }, [matIdx]);
+
+  useEffect(() => {
+    runWorkflow(0);
+    return () => {
+      isCancelled.current = true;
+      clearTimers();
+    };
+  }, [runWorkflow, clearTimers]);
 
   const mat = MATERIALS[matIdx];
 

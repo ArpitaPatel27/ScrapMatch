@@ -96,7 +96,8 @@
   letter-spacing: var(--tracking-normal);
   transition:
     color var(--duration-fast) var(--ease-out),
-    background var(--duration-fast) var(--ease-out);
+    background var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
   font-family: var(--font-sans);
   white-space: nowrap;
 }
@@ -105,6 +106,15 @@
 .dropdownOpen {
   color: var(--color-text-primary);
   background: var(--color-surface-1);
+}
+
+.navLinkActive {
+  color: var(--color-brand);
+  background: var(--color-surface-1);
+}
+
+.mobileLinkActive {
+  color: var(--color-brand);
 }
 
 /* ── DROPDOWN ─────────────────────────────────────────────────── */

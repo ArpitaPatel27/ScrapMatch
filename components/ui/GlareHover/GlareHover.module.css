@@ -4,6 +4,12 @@
   --gy: 50%;
   --gi: 0;
   overflow: hidden;
+  transition: transform var(--duration-base) var(--ease-spring),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.glare:hover {
+  transform: translateY(-2px) scale(1.01);
 }
 
 .overlay {

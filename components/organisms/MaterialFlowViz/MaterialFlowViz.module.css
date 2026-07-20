@@ -10,9 +10,13 @@
   gap: var(--space-4);
   width: 100%;
   max-width: 400px;
-  transition: opacity var(--duration-slow) var(--ease-out);
+  transition:
+    transform var(--duration-base) var(--ease-spring),
+    box-shadow var(--duration-fast) var(--ease-out),
+    border-color var(--duration-slow) var(--ease-out),
+    opacity var(--duration-slow) var(--ease-out);
   cursor: pointer;
-  /* Subtle top highlight = premium surface */
+  transform: translateY(0);
   background-image: linear-gradient(
     to bottom,
     hsla(0, 0%, 100%, 0.7) 0px,
@@ -21,8 +25,20 @@
   user-select: none;
 }
 
-.panel:hover { box-shadow: var(--shadow-2xl); }
-.panelFade   { opacity: 0; }
+.panel:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-2xl);
+  border-color: var(--color-brand-glow);
+}
+
+.panel:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 4px;
+}
+
+.panelFade {
+  opacity: 0;
+}
 
 /* ── HEADER ──────────────────────────────────────────────────── */
 .header {

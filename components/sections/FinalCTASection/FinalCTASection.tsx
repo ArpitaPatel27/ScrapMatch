@@ -30,23 +30,19 @@ function FinalCTASection() {
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
         >
-          {/* Ambient lightfall streaks — canvas layer */}
           <LightfallCanvas className={styles.lightfall} />
-
-          {/* Dot texture overlay */}
           <div className={styles.texture} aria-hidden="true" />
 
-          {/* Content sits above canvas + texture */}
           <div className={styles.content}>
             <span className={styles.eyebrow}>Get Started Today</span>
 
             <h2 className={styles.headline}>
-              Turn surplus materials<br />into new business.
+              List your first material<br />in minutes.
             </h2>
 
             <p className={styles.subheadline}>
-              Join hundreds of manufacturers already using ScrapMatch to recover
-              value from industrial waste — and buy secondary raw materials at better prices.
+              Start with one listing and let ScrapMatch match your surplus materials
+              to verified buyers in real time.
             </p>
 
             <div className={styles.actions}>
@@ -54,7 +50,7 @@ function FinalCTASection() {
                 List Your Materials
               </SpecularButton>
               <Link href="/marketplace" className={styles.secondaryAction} id="cta-explore">
-                Explore Marketplace
+                Browse Live Prices
               </Link>
             </div>
 
