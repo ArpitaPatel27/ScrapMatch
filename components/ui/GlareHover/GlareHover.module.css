@@ -1,0 +1,21 @@
+.glare {
+  position: relative;
+  --gx: 50%;
+  --gy: 50%;
+  --gi: 0;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 60% 50% at var(--gx) var(--gy),
+    hsla(0, 0%, 100%, var(--gi)) 0%,
+    transparent 70%
+  );
+  transition: opacity 0.15s ease;
+  z-index: 10;
+}

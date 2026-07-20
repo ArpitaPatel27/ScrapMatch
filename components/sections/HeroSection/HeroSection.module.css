@@ -1,0 +1,234 @@
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: var(--nav-height);
+  background: var(--color-bg-base);
+  overflow: hidden;
+}
+
+/* ── DOT GRID ─────────────────────────────────────────────────── */
+.grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, hsl(40, 14%, 68%) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.22;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, black 20%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, black 20%, transparent 100%);
+}
+
+/* ── CONTAINER — wider than other sections ────────────────────── */
+/* Use max-width-2xl (1440px) to fill widescreen comfortably */
+.container {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  /* Text column slightly narrower than viz to make viz the focal point */
+  grid-template-columns: 48fr 52fr;
+  gap: var(--space-12);
+  align-items: center;
+  width: 100%;
+  max-width: var(--max-width-2xl);
+  padding: var(--space-8) var(--space-12) var(--space-16);
+}
+
+/* ── LEFT CONTENT ─────────────────────────────────────────────── */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  align-items: flex-start;
+}
+
+/* ── EYEBROW ──────────────────────────────────────────────────── */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1-5) var(--space-4);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  box-shadow: var(--shadow-xs);
+}
+
+.eyebrowDot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--color-brand);
+  animation: pulse-dot 2.4s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* ── HEADLINE ─────────────────────────────────────────────────── */
+.headline {
+  font-size: clamp(2.6rem, 4.2vw, 4.2rem);
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.headlineAccent {
+  color: var(--color-brand);
+  display: block;
+}
+
+/* ── SUBHEAD ──────────────────────────────────────────────────── */
+.sub {
+  font-size: clamp(0.9375rem, 1.2vw, 1.0625rem);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  max-width: 440px;
+  font-weight: 400;
+}
+
+/* ── CTAs ─────────────────────────────────────────────────────── */
+.ctas {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-top: var(--space-1);
+}
+
+.ctaSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-xs);
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-base) var(--ease-spring);
+}
+
+.ctaSecondary:hover {
+  color: var(--color-text-primary);
+  background: var(--color-surface-1);
+  border-color: var(--color-border-strong);
+  transform: translateY(-2px);
+}
+
+/* ── TRUST STRIP ──────────────────────────────────────────────── */
+.trust {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2-5);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border-subtle);
+  width: 100%;
+}
+
+.trustLabel {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: var(--font-weight-medium);
+}
+
+.trustLogos {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.trustLogo {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.trustLogo:hover { opacity: 0.8; }
+
+/* ── RIGHT — Product Visualization ───────────────────────────── */
+.visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Ambient glow behind the panel — very subtle depth */
+.visualRing {
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsla(155, 42%, 28%, 0.05) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.visual > :not(.visualRing) {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── SCROLL CUE ───────────────────────────────────────────────── */
+.scrollCue {
+  position: absolute;
+  bottom: var(--space-8);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scrollLine {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--color-border-strong), transparent);
+  animation: float-gentle 2.8s ease-in-out infinite;
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────────────── */
+@media (max-width: 1200px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+    padding: var(--space-8) var(--space-8) var(--space-16);
+    max-width: var(--max-width-xl);
+  }
+  .visual { justify-content: flex-start; }
+  .sub { max-width: 100%; }
+  .scrollCue { display: none; }
+}
+
+@media (max-width: 768px) {
+  .headline { font-size: clamp(2rem, 8vw, 2.8rem); }
+  .sub { font-size: var(--text-base); }
+  .ctas { flex-direction: column; align-items: stretch; }
+  .container { padding: var(--space-8) var(--space-5) var(--space-14); }
+}
+
+@media (max-width: 480px) {
+  .trustLogos { gap: var(--space-3); }
+}

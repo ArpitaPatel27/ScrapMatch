@@ -1,0 +1,168 @@
+/* ── SECTION ──────────────────────────────────────────────────── */
+/* BorderGlow wraps the content card — the section itself is transparent padding */
+.section {
+  padding: var(--space-20) var(--space-10);
+  background: var(--color-bg-base);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+/* The BorderGlow wrapper renders a conic-gradient animated border */
+/* Its .inner div is styled here by overriding its background via wrapper class */
+/* BorderGlow component accepts a className prop which applies to its outer wrapper */
+
+/* ── CONTENT WRAPPER (inside BorderGlow .inner) ───────────────── */
+.wrapper {
+  padding: var(--space-14) var(--space-12);
+  max-width: var(--max-width-xl);
+  margin: 0 auto;
+  background: var(--color-surface-1);
+  border-radius: calc(var(--radius-2xl) - 1px);
+}
+
+/* ── HEADER ───────────────────────────────────────────────────── */
+.header {
+  text-align: center;
+  margin-bottom: var(--space-12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+}
+
+.headline {
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--color-text-primary);
+  margin: 0;
+  max-width: 560px;
+}
+
+.sub {
+  font-size: var(--text-md);
+  color: var(--color-text-secondary);
+  max-width: 480px;
+  margin: 0;
+}
+
+/* ── STEP GRID ────────────────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  position: relative;
+}
+
+/* ── STEP CARD ────────────────────────────────────────────────── */
+.stepCard {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  position: relative;
+  transition:
+    transform var(--duration-base) var(--ease-spring),
+    box-shadow var(--duration-base) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.stepCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-border-strong);
+}
+
+.stepHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stepNumber {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-brand);
+  letter-spacing: 0.1em;
+}
+
+.iconWrapper {
+  width: 38px;
+  height: 38px;
+  background: var(--color-brand-muted);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-brand);
+}
+
+.iconSVG {
+  width: 17px;
+  height: 17px;
+  stroke-width: 1.5;
+}
+
+.stepTitle {
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.stepDesc {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.65;
+  margin: 0;
+  flex: 1;
+}
+
+/* Connector arrow between step cards (hidden at smaller breakpoints) */
+.connector {
+  position: absolute;
+  top: 28px;
+  right: -14px;
+  width: 20px;
+  height: 1px;
+  background: var(--color-border-strong);
+  z-index: 2;
+}
+
+.connector::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: -3px;
+  width: 6px;
+  height: 6px;
+  border-top: 1px solid var(--color-border-strong);
+  border-right: 1px solid var(--color-border-strong);
+  transform: rotate(45deg);
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .connector { display: none; }
+  .wrapper { padding: var(--space-10) var(--space-8); }
+  .section { padding: var(--space-20) var(--space-6); }
+}
+
+@media (max-width: 640px) {
+  .grid { grid-template-columns: 1fr; }
+  .wrapper { padding: var(--space-8) var(--space-5); }
+}

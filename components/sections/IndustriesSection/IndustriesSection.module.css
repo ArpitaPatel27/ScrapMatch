@@ -1,0 +1,131 @@
+/* ── SECTION ──────────────────────────────────────────────────── */
+.section {
+  padding: var(--space-20) 0;
+  background: var(--color-bg-base);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.container {
+  max-width: var(--max-width-xl);
+  margin: 0 auto;
+  padding: 0 var(--space-10);
+}
+
+/* ── HEADER ───────────────────────────────────────────────────── */
+.header {
+  text-align: center;
+  margin-bottom: var(--space-12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+}
+
+.headline {
+  font-size: clamp(1.75rem, 2.8vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--color-text-primary);
+  margin: 0;
+  max-width: 600px;
+}
+
+.subheadline {
+  font-size: var(--text-md);
+  color: var(--color-text-secondary);
+  margin: 0;
+  max-width: 480px;
+}
+
+/* ── GRID ─────────────────────────────────────────────────────── */
+/* 7 cards: 4 top row, 3 bottom row centred */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+}
+
+/* ── CARD WRAPPER (for motion) ────────────────────────────────── */
+.cardWrapper {
+  /* Nothing extra needed — GlareHover handles hover */
+}
+
+/* ── CARD (rendered by GlareHover) ───────────────────────────── */
+.card {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  height: 100%;
+  cursor: default;
+  /* Left accent from --cat-color passed via cardWrapper */
+  border-left: 3px solid var(--cat-color, var(--color-brand));
+  transition:
+    transform var(--duration-base) var(--ease-spring),
+    box-shadow var(--duration-base) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ── ICON ─────────────────────────────────────────────────────── */
+.iconWrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: hsl(0, 0%, 100%);
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.5;
+}
+
+.cardTitle {
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.cardDesc {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+  .container { padding: 0 var(--space-6); }
+}
+
+@media (max-width: 768px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .grid { grid-template-columns: 1fr; }
+}

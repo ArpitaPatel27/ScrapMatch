@@ -1,0 +1,62 @@
+/* ============================================================
+   SCRAPMATCH DESIGN SYSTEM — COLOR TOKENS
+   Source of Truth: Product Design v2 + Engineering Brief
+   ============================================================ */
+
+:root {
+  /* ── BACKGROUNDS ─────────────────────────────────────────── */
+  --color-bg-base:       hsl(220, 15%, 6%);
+  --color-bg-elevated:   hsl(220, 13%, 8%);
+  --color-surface-1:     hsl(220, 12%, 10%);
+  --color-surface-2:     hsl(220, 10%, 14%);
+  --color-surface-3:     hsl(220, 8%, 18%);
+
+  /* ── BORDERS ─────────────────────────────────────────────── */
+  --color-border:        hsl(220, 10%, 20%);
+  --color-border-subtle: hsl(220, 10%, 14%);
+  --color-border-strong: hsl(220, 10%, 30%);
+  --color-border-focus:  hsl(162, 80%, 45%);
+
+  /* ── TEXT ────────────────────────────────────────────────── */
+  --color-text-primary:   hsl(0, 0%, 96%);
+  --color-text-secondary: hsl(220, 5%, 60%);
+  --color-text-muted:     hsl(220, 5%, 40%);
+  --color-text-disabled:  hsl(220, 5%, 28%);
+  --color-text-inverse:   hsl(220, 15%, 6%);
+
+  /* ── BRAND — Electric Emerald ────────────────────────────── */
+  --color-brand:             hsl(162, 80%, 45%);
+  --color-brand-hover:       hsl(162, 80%, 50%);
+  --color-brand-active:      hsl(162, 80%, 38%);
+  --color-brand-muted:       hsl(162, 50%, 12%);
+  --color-brand-glow:        hsla(162, 80%, 45%, 0.15);
+  --color-brand-glow-strong: hsla(162, 80%, 45%, 0.30);
+
+  /* ── ACCENT — Bright Blue ────────────────────────────────── */
+  --color-accent:       hsl(210, 100%, 60%);
+  --color-accent-muted: hsl(210, 60%, 15%);
+
+  /* ── SEMANTIC ────────────────────────────────────────────── */
+  --color-success:        hsl(142, 70%, 45%);
+  --color-success-muted:  hsl(142, 40%, 12%);
+  --color-warning:        hsl(38, 95%, 55%);
+  --color-warning-muted:  hsl(38, 60%, 12%);
+  --color-danger:         hsl(0, 80%, 55%);
+  --color-danger-muted:   hsl(0, 50%, 12%);
+  --color-info:           hsl(210, 80%, 60%);
+  --color-info-muted:     hsl(210, 50%, 12%);
+
+  /* ── MATERIAL CATEGORY COLORS ────────────────────────────── */
+  --color-cat-metals:      hsl(210, 70%, 55%);
+  --color-cat-plastics:    hsl(270, 60%, 60%);
+  --color-cat-textiles:    hsl(340, 70%, 60%);
+  --color-cat-paper:       hsl(35, 80%, 55%);
+  --color-cat-glass:       hsl(185, 70%, 55%);
+  --color-cat-rubber:      hsl(25, 75%, 50%);
+  --color-cat-wood:        hsl(30, 60%, 45%);
+  --color-cat-chemicals:   hsl(55, 80%, 50%);
+  --color-cat-construction:hsl(15, 60%, 50%);
+  --color-cat-agricultural:hsl(90, 65%, 45%);
+  --color-cat-industrial:  hsl(220, 60%, 55%);
+  --color-cat-packaging:   hsl(300, 50%, 55%);
+}

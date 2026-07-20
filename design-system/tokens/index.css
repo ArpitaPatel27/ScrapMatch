@@ -1,0 +1,8 @@
+/* ============================================================
+   SCRAPMATCH DESIGN SYSTEM — TOKEN INDEX
+   Imports all token files in correct cascade order
+   ============================================================ */
+
+@import './colors.css';
+@import './typography.css';
+@import './primitives.css';

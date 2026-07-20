@@ -1,0 +1,135 @@
+/* ── SECTION ──────────────────────────────────────────────────── */
+.section {
+  padding: var(--space-20) 0;
+  background: var(--color-bg-base);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.container {
+  max-width: var(--max-width-xl);
+  margin: 0 auto;
+  padding: 0 var(--space-10);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+/* ── HEADER ───────────────────────────────────────────────────── */
+.header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+}
+
+.headline {
+  font-size: clamp(1.75rem, 2.8vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+/* ── METRICS GRID (2×2) ───────────────────────────────────────── */
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+}
+
+.metricCard {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-7) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  text-align: center;
+  transition:
+    transform var(--duration-base) var(--ease-spring),
+    box-shadow var(--duration-base) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.metricCard:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-brand-border);
+}
+
+/* The CountUp span is wrapped in this div */
+.metricValue {
+  font-family: var(--font-mono);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 800;
+  color: var(--color-brand);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.metricText {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* ── BENEFITS ROW ─────────────────────────────────────────────── */
+.benefitsRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-6);
+  padding: var(--space-7) var(--space-8);
+  background: var(--color-brand-muted);
+  border: 1px solid var(--color-brand-border);
+  border-radius: var(--radius-xl);
+  flex-wrap: wrap;
+}
+
+.benefitItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  flex: 1;
+  min-width: 200px;
+}
+
+.benefitIcon {
+  color: var(--color-brand);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.benefitText {
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.5;
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .metricsGrid { grid-template-columns: repeat(2, 1fr); }
+  .container { padding: 0 var(--space-6); }
+}
+
+@media (max-width: 640px) {
+  .metricsGrid { grid-template-columns: repeat(2, 1fr); }
+  .benefitsRow { gap: var(--space-4); }
+}
+
+@media (max-width: 480px) {
+  .metricsGrid { grid-template-columns: 1fr; }
+  .metricValue { font-size: 2rem; }
+}

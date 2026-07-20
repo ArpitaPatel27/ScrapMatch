@@ -1,66 +1,70 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import dynamic from 'next/dynamic';
+import MarketingNav from '@/components/organisms/MarketingNav/MarketingNav';
+import MarketingFooter from '@/components/organisms/MarketingFooter/MarketingFooter';
+import HeroSection from '@/components/sections/HeroSection/HeroSection';
 
-export default function Home() {
+/* ── Below-fold sections — lazy loaded for performance ─────────── */
+// Each section answers one question in the homepage story:
+// 1. Hero         → What is ScrapMatch?
+// 2. Why          → Why does this problem exist?
+// 3. HowItWorks   → How does ScrapMatch solve it?
+// 4. Industries   → Who can use it?
+// 5. Features     → What do you get?
+// 6. Impact       → What are the results?
+// 7. SocialProof  → Why trust ScrapMatch?
+// 8. FAQ          → Common questions answered
+// 9. FinalCTA     → Take action
+
+const WhySection = dynamic(
+  () => import('@/components/sections/WhySection/WhySection')
+);
+
+const HowItWorksSection = dynamic(
+  () => import('@/components/sections/HowItWorksSection/HowItWorksSection')
+);
+
+const IndustriesSection = dynamic(
+  () => import('@/components/sections/IndustriesSection/IndustriesSection')
+);
+
+const FeaturesSection = dynamic(
+  () => import('@/components/sections/FeaturesSection/FeaturesSection')
+);
+
+const ImpactSection = dynamic(
+  () => import('@/components/sections/ImpactSection/ImpactSection')
+);
+
+const SocialProof = dynamic(
+  () => import('@/components/sections/SocialProof/SocialProof')
+);
+
+const FAQSection = dynamic(
+  () => import('@/components/sections/FAQSection/FAQSection')
+);
+
+const FinalCTASection = dynamic(
+  () => import('@/components/sections/FinalCTASection/FinalCTASection')
+);
+
+export default function HomePage() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <>
+      <MarketingNav />
+
+      <main id="main-content">
+        <HeroSection />
+        <WhySection />
+        <HowItWorksSection />
+        <IndustriesSection />
+        <FeaturesSection />
+        <ImpactSection />
+        <SocialProof />
+        <FAQSection />
+        <FinalCTASection />
       </main>
-    </div>
+
+      <MarketingFooter />
+    </>
   );
 }

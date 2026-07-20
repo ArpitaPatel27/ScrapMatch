@@ -1,0 +1,251 @@
+.container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.leftPanel {
+  display: none;
+  width: 40%;
+  background-color: var(--color-brand);
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+  padding: var(--space-16);
+  color: white;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media (min-width: 1024px) {
+  .leftPanel {
+    display: flex;
+  }
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.logo {
+  font-size: var(--text-3xl);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  font-family: var(--font-display);
+}
+
+.tagline {
+  font-size: var(--text-xl);
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.4;
+  margin-bottom: var(--space-12);
+}
+
+.trustList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.trustItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  font-size: var(--text-base);
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+}
+
+.trustIcon {
+  color: var(--color-accent);
+}
+
+.rightPanel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8);
+  background-color: var(--color-bg-elevated);
+}
+
+.formWrapper {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  margin-bottom: var(--space-10);
+}
+
+.heading {
+  font-size: clamp(1.75rem, 2.5vw, 2.25rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.subtext {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: transparent;
+  color: var(--color-text-primary);
+  font-size: var(--text-base);
+  transition: border-color var(--duration-fast) ease-out;
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--color-brand);
+}
+
+.passwordInput {
+  padding-right: var(--space-12);
+}
+
+.toggleButton {
+  position: absolute;
+  right: var(--space-3);
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-1);
+}
+
+.toggleButton:hover {
+  color: var(--color-text-primary);
+}
+
+.forgotLink {
+  align-self: flex-end;
+  font-size: var(--text-sm);
+  color: var(--color-brand);
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: calc(var(--space-1) * -1);
+}
+
+.forgotLink:hover {
+  text-decoration: underline;
+}
+
+.submitWrapper {
+  margin-top: var(--space-2);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Make SpecularButton take full width */
+.submitWrapper > * {
+  width: 100%;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: var(--space-8) 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.divider::before {
+  margin-right: var(--space-4);
+}
+
+.divider::after {
+  margin-left: var(--space-4);
+}
+
+.googleButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: transparent;
+  color: var(--color-text-primary);
+  font-size: var(--text-base);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) ease-out;
+}
+
+.googleButton:hover {
+  background-color: var(--color-surface-1);
+}
+
+.googleIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.footer {
+  margin-top: var(--space-8);
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.signupLink {
+  color: var(--color-brand);
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: var(--space-1);
+}
+
+.signupLink:hover {
+  text-decoration: underline;
+}

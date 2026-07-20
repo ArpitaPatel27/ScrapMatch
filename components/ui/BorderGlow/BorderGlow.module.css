@@ -1,0 +1,56 @@
+/* BorderGlow — animated rotating conic gradient border
+   Creates a subtle, premium animated border effect.
+   Use sparingly — only on key feature sections.
+*/
+
+.wrapper {
+  --glow-color: hsl(155, 42%, 28%);
+  position: relative;
+  border-radius: var(--radius-2xl);
+  padding: 1px; /* creates the border gap */
+  /* Isolate stacking context */
+  isolation: isolate;
+}
+
+/* The rotating gradient arc that creates the glowing border */
+.glow {
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    hsla(155, 42%, 28%, 0.45) 60deg,
+    transparent 120deg,
+    transparent 200deg,
+    hsla(24, 62%, 40%, 0.25) 260deg,
+    transparent 320deg,
+    transparent 360deg
+  );
+  animation: border-spin 5s linear infinite;
+  z-index: 0;
+}
+
+/* Mask: cut out the inner area so only the 1px border shows */
+.glow::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: calc(var(--radius-2xl) - 1px);
+  /* Transparent so the section background shows */
+  background: transparent;
+}
+
+/* Inner content sits above the glow */
+.inner {
+  position: relative;
+  z-index: 1;
+  border-radius: calc(var(--radius-2xl) - 1px);
+  /* No background — inherits from parent section */
+  overflow: hidden;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .glow { animation: none; }
+}

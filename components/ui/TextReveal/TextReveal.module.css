@@ -1,0 +1,45 @@
+.container {
+  display: inline; /* wrap naturally with text flow */
+}
+
+.wordOuter {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  /* small offset to avoid clipping descenders */
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+.wordInner {
+  display: inline-block;
+  transform: translateY(105%);
+  opacity: 0;
+  transition:
+    transform var(--duration-slow) var(--ease-smooth),
+    opacity var(--duration-slow) var(--ease-out);
+  will-change: transform, opacity;
+}
+
+.revealed {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.space {
+  display: inline-block;
+  width: 0.28em;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .wordInner {
+    transform: none;
+    opacity: 0;
+    transition: opacity var(--duration-base) var(--ease-out);
+  }
+  .revealed {
+    transform: none;
+    opacity: 1;
+  }
+}
