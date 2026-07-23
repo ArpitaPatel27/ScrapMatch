@@ -15,6 +15,8 @@ const data: IndustryPageData = {
   heroSubtitle: 'PCB scrap, copper cable, component stock — matched to certified PROs and precious metal refiners across India.',
   overview: 'India is the world\'s third-largest generator of e-waste, yet formal recycling handles less than 20% of the volume. ScrapMatch helps electronics manufacturers and EPC contractors fulfil their Extended Producer Responsibility (EPR) obligations by connecting them to CPCB-registered PROs and certified e-waste dismantlers. Our platform handles chain-of-custody documentation, material weight certificates, and destruction reports — making compliance straightforward.',
   accentColor: 'hsl(155, 42%, 28%)',
+  heroImage: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=1400&q=75&auto=format&fit=crop',
+  heroImageAlt: 'Electronic circuit boards and e-waste components',
   materials: [
     { name: 'PCB Scrap Mixed', grade: 'Mixed', qty: '50kg–2T', price: '₹80–120/kg', trend: 'up' },
     { name: 'Bare PCB (FR4)', grade: 'Trimmed', qty: '50kg–1T', price: '₹25–40/kg' },

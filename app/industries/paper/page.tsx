@@ -15,6 +15,8 @@ const data: IndustryPageData = {
   heroSubtitle: 'OCC, kraft, newsprint, tissue grades — matched to paper mills and recycling aggregators at live market rates.',
   overview: 'Paper recycling is one of India\'s most mature circular economy sectors, yet millions of tonnes of paper and packaging waste are still landfilled or exported at low value each year. ScrapMatch connects industrial generators — manufacturing plants, printers, logistics companies — with paper mills and waste aggregators who can pay market-leading prices for clean, segregated fibre. Our AI grades material quality and provides real-time CPCB recycled content benchmarks.',
   accentColor: 'hsl(35, 58%, 42%)',
+  heroImage: 'https://images.unsplash.com/photo-1586769852044-692d6e3703f0?w=1400&q=75&auto=format&fit=crop',
+  heroImageAlt: 'Paper bales stacked in a large recycling facility',
   materials: [
     { name: 'OCC Old Corrugated Containers', grade: 'Clean', qty: '5–100T', price: '₹7–11/kg', trend: 'up' },
     { name: 'Kraft Paper Waste', grade: 'Unbleached', qty: '1–30T', price: '₹5–9/kg' },

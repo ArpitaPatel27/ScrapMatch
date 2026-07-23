@@ -1,12 +1,72 @@
 /* ── HERO ──────────────────────────────────────────────────────── */
 .hero {
+  position: relative;
   padding: calc(var(--nav-height) + var(--space-20)) 0 var(--space-16);
   background-color: var(--color-bg-base);
   background-image: radial-gradient(ellipse 80% 50% at 50% -10%, hsla(155, 48%, 24%, 0.06) 0%, transparent 70%);
   border-bottom: 1px solid var(--color-border-subtle);
+  overflow: hidden;
 }
 
+/* ── HERO BACKGROUND IMAGE ─────────────────────────────────────── */
+.heroBgImage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.heroBgOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    hsla(215, 30%, 5%, 0.85) 0%,
+    hsla(215, 25%, 8%, 0.70) 55%,
+    hsla(215, 20%, 10%, 0.55) 100%
+  );
+}
+
+/* When a hero image is present, heroInner text goes white */
+.heroInnerOnImage .breadcrumb,
+.heroInnerOnImage .breadcrumb a,
+.heroInnerOnImage .breadcrumb span { color: rgba(255,255,255,0.65); }
+.heroInnerOnImage .breadcrumb a:hover { color: rgba(255,255,255,0.9); }
+
+.heroInnerOnImage .heroEyebrow {
+  color: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.25);
+}
+
+.heroInnerOnImage .heroTitle {
+  color: #fff;
+}
+
+.heroInnerOnImage .heroSubtitle {
+  color: rgba(255,255,255,0.80);
+}
+
+.heroInnerOnImage .heroCtaSecondary {
+  color: rgba(255,255,255,0.88);
+  border-color: rgba(255,255,255,0.28);
+  background: rgba(255,255,255,0.10);
+}
+.heroInnerOnImage .heroCtaSecondary:hover {
+  background: rgba(255,255,255,0.18);
+  color: #fff;
+}
+
+.heroInnerOnImage .insightsBar {
+  background: rgba(255,255,255,0.10);
+  border-color: rgba(255,255,255,0.20);
+  backdrop-filter: blur(10px);
+}
+.heroInnerOnImage .insightStat  { color: #fff; }
+.heroInnerOnImage .insightLabel { color: rgba(255,255,255,0.65); }
+
 .heroInner {
+  position: relative;
+  z-index: 1;
   max-width: var(--max-width-xl);
   margin: 0 auto;
   padding: 0 var(--space-10);

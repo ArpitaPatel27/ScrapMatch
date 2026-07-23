@@ -1,4 +1,4 @@
-/* ── HERO ──────────────────────────────────────────────────── */
+/* ── HERO ──────────────────────────────────────────────────────── */
 .hero {
   padding: calc(var(--nav-height) + var(--space-20)) 0 var(--space-20);
   background-color: var(--color-bg-base);
@@ -48,7 +48,7 @@
   line-height: 1.6;
 }
 
-/* ── STATS ROW ─────────────────────────────────────────────── */
+/* ── STATS ROW ─────────────────────────────────────────────────── */
 .statsRow {
   display: flex;
   align-items: center;
@@ -86,16 +86,9 @@
   text-align: center;
 }
 
-/* ── SECTION STYLES ────────────────────────────────────────── */
-.section {
-  padding: var(--space-20) 0;
-  background-color: var(--color-bg-base);
-}
-
-.sectionAlt {
-  padding: var(--space-20) 0;
-  background-color: var(--color-surface-1);
-}
+/* ── SECTION PRIMITIVES ────────────────────────────────────────── */
+.section    { padding: var(--space-20) 0; background-color: var(--color-bg-base); }
+.sectionAlt { padding: var(--space-20) 0; background-color: var(--color-surface-1); }
 
 .container {
   max-width: var(--max-width-xl);
@@ -125,84 +118,94 @@
   color: var(--color-text-primary);
 }
 
-/* ── INDUSTRIES GRID ───────────────────────────────────────── */
+/* ── INDUSTRIES GRID ───────────────────────────────────────────── */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--space-5);
 }
 
-/* ── INDUSTRY CARD ─────────────────────────────────────────── */
+/* ── CARD ──────────────────────────────────────────────────────── */
 .card {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
-  padding: var(--space-8);
-  background-color: var(--color-bg-elevated);
+  background: var(--color-bg-elevated);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
+  overflow: hidden;
   text-decoration: none;
+  /* Bottom accent stripe using CSS var */
+  border-bottom: 3px solid var(--accent, var(--color-brand));
   transition:
     transform var(--duration-base) var(--ease-spring),
     box-shadow var(--duration-base) var(--ease-out),
     border-color var(--duration-fast) var(--ease-out);
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-
-.card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, transparent 60%, hsla(155, 48%, 24%, 0.02) 100%);
-  pointer-events: none;
-  transition: opacity var(--duration-base) var(--ease-out);
-  opacity: 0;
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-card-hover);
-  border-color: var(--color-border-strong);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
 }
 
-.card:hover::before {
-  opacity: 1;
-}
-
-.cardTop {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: var(--space-2);
-}
-
-.cardIcon {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-lg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* ── CARD IMAGE ────────────────────────────────────────────────── */
+.cardImageWrap {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--color-surface-2);
   flex-shrink: 0;
 }
 
-.cardHighlight {
-  font-size: var(--text-xs);
-  font-weight: 500;
-  color: var(--color-text-muted);
-  background: var(--color-surface-1);
-  border: 1px solid var(--color-border-subtle);
+/* Zoom on hover */
+.card:hover .cardImageWrap img {
+  transform: scale(1.06) !important;
+}
+
+.cardImageWrap img {
+  transition: transform 0.6s var(--ease-smooth) !important;
+}
+
+/* Bottom-to-transparent gradient for chip legibility */
+.cardImageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 40%,
+    hsla(215, 30%, 6%, 0.5) 100%
+  );
+  pointer-events: none;
+}
+
+/* Highlight badge overlaid on image */
+.cardChip {
+  position: absolute;
+  bottom: var(--space-3);
+  left: var(--space-3);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #fff;
+  padding: var(--space-1) var(--space-2-5);
   border-radius: var(--radius-full);
-  padding: var(--space-1) var(--space-3);
+  white-space: nowrap;
+}
+
+/* ── CARD BODY ─────────────────────────────────────────────────── */
+.cardBody {
+  padding: var(--space-5) var(--space-6) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  flex: 1;
 }
 
 .cardTitle {
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
   font-weight: 700;
   color: var(--color-text-primary);
   letter-spacing: -0.02em;
+  margin: 0;
 }
 
 .cardDesc {
@@ -210,6 +213,7 @@
   color: var(--color-text-secondary);
   line-height: var(--leading-relaxed);
   flex: 1;
+  margin: 0;
 }
 
 .cardCta {
@@ -218,7 +222,7 @@
   gap: var(--space-1-5);
   font-size: var(--text-sm);
   font-weight: 600;
-  color: var(--color-brand);
+  color: var(--accent, var(--color-brand));
   margin-top: var(--space-2);
   transition: gap var(--duration-fast) var(--ease-out);
 }
@@ -227,33 +231,31 @@
   gap: var(--space-2-5);
 }
 
-/* ── STEPS ─────────────────────────────────────────────────── */
+/* ── STEPS ─────────────────────────────────────────────────────── */
 .stepsGrid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--space-6);
 }
 
-@media (min-width: 768px) {
-  .stepsGrid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
+@media (max-width: 768px) { .stepsGrid { grid-template-columns: 1fr; } }
 
 .stepCard {
-  background-color: var(--color-bg-elevated);
+  background: var(--color-bg-elevated);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   padding: var(--space-8);
-  position: relative;
+  transition: box-shadow var(--duration-base) var(--ease-out), transform var(--duration-base) var(--ease-spring);
 }
+
+.stepCard:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
 
 .stepNumber {
   width: 36px;
   height: 36px;
   border-radius: var(--radius-full);
-  background-color: var(--color-brand);
-  color: var(--color-bg-elevated);
+  background: var(--color-brand);
+  color: #fff;
   font-weight: 700;
   font-size: var(--text-sm);
   display: flex;
@@ -277,7 +279,7 @@
   line-height: var(--leading-relaxed);
 }
 
-/* ── CTA ───────────────────────────────────────────────────── */
+/* ── CTA ───────────────────────────────────────────────────────── */
 .ctaWrapper {
   text-align: center;
   max-width: 640px;
@@ -300,16 +302,10 @@
 
 .ctaButtons {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: var(--space-4);
-}
-
-@media (min-width: 480px) {
-  .ctaButtons {
-    flex-direction: row;
-  }
+  flex-wrap: wrap;
 }
 
 .secondaryBtn {
@@ -321,30 +317,32 @@
   border-radius: var(--radius-lg);
   font-weight: 600;
   font-size: var(--text-base);
-  background-color: var(--color-bg-elevated);
+  background: var(--color-bg-elevated);
   color: var(--color-text-primary);
   border: 1px solid var(--color-border);
+  text-decoration: none;
   transition:
     background var(--duration-fast) var(--ease-out),
     border-color var(--duration-fast) var(--ease-out),
-    transform var(--duration-base) var(--ease-spring),
-    box-shadow var(--duration-fast) var(--ease-out);
-  text-decoration: none;
+    transform var(--duration-base) var(--ease-spring);
   box-shadow: var(--shadow-xs);
 }
-
 .secondaryBtn:hover {
-  background-color: var(--color-surface-1);
+  background: var(--color-surface-1);
   border-color: var(--color-border-strong);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-sm);
   color: var(--color-text-primary);
 }
 
-/* ── RESPONSIVE ────────────────────────────────────────────── */
+/* ── RESPONSIVE ────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (max-width: 768px) {
   .heroContent { padding: 0 var(--space-5); }
-  .container { padding: 0 var(--space-5); }
-  .statsRow { gap: var(--space-6); padding: var(--space-6); }
-  .grid { grid-template-columns: 1fr; }
+  .container   { padding: 0 var(--space-5); }
+  .statsRow    { gap: var(--space-6); padding: var(--space-6); }
+  .grid        { grid-template-columns: 1fr; }
+  .stepsGrid   { grid-template-columns: 1fr; }
 }

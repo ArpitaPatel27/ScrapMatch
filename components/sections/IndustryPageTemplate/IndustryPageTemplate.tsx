@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowRight, TrendingUp, Users, ShoppingCart, BarChart3, ArrowUpRight } from 'lucide-react';
 import MarketingNav from '@/components/organisms/MarketingNav/MarketingNav';
@@ -33,6 +34,8 @@ export interface IndustryPageData {
   heroSubtitle: string;
   overview: string;
   accentColor: string;
+  heroImage?: string;       // optional Unsplash URL
+  heroImageAlt?: string;
   materials: MaterialItem[];
   buyers: string[];
   sellers: string[];
@@ -63,7 +66,21 @@ export default function IndustryPageTemplate({ data }: Props) {
       <main>
         {/* ── HERO ───────────────────────────────────────────────── */}
         <section className={styles.hero} style={{ '--industry-color': data.accentColor } as React.CSSProperties}>
-          <div className={styles.heroInner}>
+          {/* Optional background image */}
+          {data.heroImage && (
+            <div className={styles.heroBgImage}>
+              <Image
+                src={data.heroImage}
+                alt={data.heroImageAlt ?? data.name}
+                fill
+                style={{ objectFit: 'cover', objectPosition: 'center' }}
+                priority
+                sizes="100vw"
+              />
+              <div className={styles.heroBgOverlay} />
+            </div>
+          )}
+          <div className={`${styles.heroInner} ${data.heroImage ? styles.heroInnerOnImage : ''}`}>
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}

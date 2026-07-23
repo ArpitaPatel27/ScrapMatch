@@ -15,6 +15,8 @@ const data: IndustryPageData = {
   heroSubtitle: 'From IS2062 offcuts to Cat1 copper wire — ScrapMatch connects verified sellers with industrial buyers in real time.',
   overview: 'India produces over 120 million tonnes of steel annually, generating significant volumes of offcuts, turnings, and scrap. ScrapMatch\'s AI matches this material to verified buyers — secondary steel processors, re-rollers, foundries, and fabricators — reducing the time-to-sale from weeks to days. Our platform tracks live MCX-aligned prices for copper, aluminium, and zinc, ensuring both sides trade at fair market rates.',
   accentColor: 'hsl(210, 45%, 42%)',
+  heroImage: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1400&q=75&auto=format&fit=crop',
+  heroImageAlt: 'Steel plant with industrial equipment and metal processing',
   materials: [
     { name: 'Steel Offcuts IS2062', grade: 'Grade A', qty: '1–50T', price: '₹28–35/kg', trend: 'up' },
     { name: 'Steel Turnings / Borings', grade: 'Mixed', qty: '500kg–20T', price: '₹15–22/kg' },

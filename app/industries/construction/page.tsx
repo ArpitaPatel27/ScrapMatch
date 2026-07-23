@@ -15,6 +15,8 @@ const data: IndustryPageData = {
   heroSubtitle: 'Fly ash, GGBFS, M-Sand and rebar offcuts — traded in bulk between power plants, steel mills, and infrastructure companies.',
   overview: 'India\'s construction and infrastructure boom generates enormous quantities of valuable industrial by-products — fly ash from thermal power plants, GGBFS from steel mills, and recycled aggregate from demolition. ScrapMatch connects generators with cement producers, ready-mix concrete plants, and infrastructure contractors who are required to use these materials under Green Rating and EPR mandates. We facilitate bulk transactions across 10–500 tonne lots with verified quality certifications.',
   accentColor: 'hsl(15, 45%, 38%)',
+  heroImage: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1400&q=75&auto=format&fit=crop',
+  heroImageAlt: 'Construction aggregate materials and concrete at an infrastructure site',
   materials: [
     { name: 'Class F Fly Ash', grade: 'IS 3812', qty: '10–500T', price: '₹1.2–1.8/kg', trend: 'up' },
     { name: 'GGBFS Granulated Slag', grade: 'Grade 120', qty: '10–200T', price: '₹1.5–2.2/kg' },

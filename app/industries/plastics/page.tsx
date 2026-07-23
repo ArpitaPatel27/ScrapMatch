@@ -15,6 +15,8 @@ const data: IndustryPageData = {
   heroSubtitle: 'HDPE, PET, PP, ABS and 30+ polymer grades — matched to verified compounders and recyclers across India.',
   overview: 'India generates over 3.4 million tonnes of plastic waste annually. ScrapMatch helps manufacturers and processors convert their plastic offcuts, purges, and regrind into verified secondary raw material transactions. Our AI classifies polymer types, assigns grades and purity scores, and connects sellers directly to compounders, recyclers, and EPR-compliant aggregators — without brokers or price uncertainty.',
   accentColor: 'hsl(260, 38%, 48%)',
+  heroImage: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=75&auto=format&fit=crop',
+  heroImageAlt: 'Plastic recycling facility with sorted polymer materials',
   materials: [
     { name: 'HDPE Regrind', grade: 'Grade A', qty: '1–20T', price: '₹33–38/kg', trend: 'up' },
     { name: 'PET Flake Food Grade', grade: 'Clear', qty: '500kg–5T', price: '₹28–34/kg' },
