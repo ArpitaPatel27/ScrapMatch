@@ -7,19 +7,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Menu, X, Zap } from 'lucide-react';
 import styles from './MarketingNav.module.css';
 
-const solutions = [
-  { label: 'For Sellers', href: '/solutions/sellers', desc: 'List materials, find buyers, get better prices' },
-  { label: 'For Buyers', href: '/solutions/buyers', desc: 'Source secondary raw materials reliably' },
-  { label: 'For Enterprise', href: '/solutions/enterprise', desc: 'Multi-plant dashboard and ESG reporting' },
-  { label: 'For Traders', href: '/solutions/traders', desc: 'Scale your trading operations with AI' },
-];
-
 const industries = [
-  { label: 'Plastics', href: '/industries/plastics' },
-  { label: 'Metals', href: '/industries/metals' },
-  { label: 'Textiles', href: '/industries/textiles' },
-  { label: 'Chemicals', href: '/industries/chemicals' },
-  { label: 'Construction', href: '/industries/construction' },
+  { label: 'Steel & Metals',    href: '/industries/steel' },
+  { label: 'Plastics',          href: '/industries/plastics' },
+  { label: 'Paper & Packaging', href: '/industries/paper' },
+  { label: 'Construction',      href: '/industries/construction' },
+  { label: 'Electronics',       href: '/industries/electronics' },
+  { label: 'Chemicals',         href: '/industries/chemicals' },
+  { label: 'Textiles',          href: '/industries/textiles' },
+  { label: 'Automotive',        href: '/industries/automotive' },
+  { label: 'Packaging',         href: '/industries/packaging' },
 ];
 
 export default function MarketingNav() {
@@ -75,53 +72,20 @@ export default function MarketingNav() {
           {/* Desktop Nav Links */}
           <div className={styles.links} ref={dropdownRef}>
             <Link
+              href="/"
+              className={`${styles.navLink} ${pathname === '/' ? styles.navLinkActive : ''}`}
+              aria-current={pathname === '/' ? 'page' : undefined}
+            >
+              Home
+            </Link>
+
+            <Link
               href="/product"
               className={`${styles.navLink} ${isActiveLink('/product') ? styles.navLinkActive : ''}`}
               aria-current={isActiveLink('/product') ? 'page' : undefined}
             >
               Product
             </Link>
-
-            {/* Solutions Dropdown */}
-            <div className={styles.dropdownWrapper}>
-              <button
-                className={`${styles.navLink} ${styles.dropdownTrigger} ${openDropdown === 'solutions' ? styles.dropdownOpen : ''} ${isActiveLink('/solutions') ? styles.navLinkActive : ''}`}
-                onClick={() => setOpenDropdown(openDropdown === 'solutions' ? null : 'solutions')}
-                aria-expanded={openDropdown === 'solutions'}
-                aria-haspopup="true"
-              >
-                Solutions
-                <ChevronDown
-                  size={14}
-                  className={`${styles.chevron} ${openDropdown === 'solutions' ? styles.chevronOpen : ''}`}
-                />
-              </button>
-              <AnimatePresence>
-                {openDropdown === 'solutions' && (
-                  <motion.div
-                    className={styles.dropdown}
-                    initial={{ opacity: 0, y: -8, scale: 0.97 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -8, scale: 0.97 }}
-                    transition={{ duration: 0.15, ease: [0.34, 1.56, 0.64, 1] }}
-                    role="menu"
-                  >
-                    {solutions.map((item) => (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        className={styles.dropdownItem}
-                        role="menuitem"
-                        onClick={() => setOpenDropdown(null)}
-                      >
-                        <span className={styles.dropdownItemLabel}>{item.label}</span>
-                        <span className={styles.dropdownItemDesc}>{item.desc}</span>
-                      </Link>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
 
             {/* Industries Dropdown */}
             <div className={styles.dropdownWrapper}>
@@ -140,24 +104,34 @@ export default function MarketingNav() {
               <AnimatePresence>
                 {openDropdown === 'industries' && (
                   <motion.div
-                    className={`${styles.dropdown} ${styles.dropdownSm}`}
+                    className={`${styles.dropdown} ${styles.dropdownWide}`}
                     initial={{ opacity: 0, y: -8, scale: 0.97 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -8, scale: 0.97 }}
                     transition={{ duration: 0.15, ease: [0.34, 1.56, 0.64, 1] }}
                     role="menu"
                   >
-                    {industries.map((item) => (
+                    <div className={styles.dropdownGrid}>
+                      {industries.map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className={`${styles.dropdownItem} ${styles.dropdownItemSimple}`}
+                          role="menuitem"
+                          onClick={() => setOpenDropdown(null)}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
                       <Link
-                        key={item.href}
-                        href={item.href}
-                        className={`${styles.dropdownItem} ${styles.dropdownItemSimple}`}
+                        href="/industries"
+                        className={`${styles.dropdownItem} ${styles.dropdownViewAll}`}
                         role="menuitem"
                         onClick={() => setOpenDropdown(null)}
                       >
-                        {item.label}
+                        View all industries →
                       </Link>
-                    ))}
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -212,23 +186,19 @@ export default function MarketingNav() {
           >
             <div className={styles.mobileLinks}>
               <Link
+                href="/"
+                className={`${styles.mobileLink} ${pathname === '/' ? styles.mobileLinkActive : ''}`}
+                onClick={() => setMobileOpen(false)}
+              >
+                Home
+              </Link>
+              <Link
                 href="/product"
                 className={`${styles.mobileLink} ${isActiveLink('/product') ? styles.mobileLinkActive : ''}`}
                 onClick={() => setMobileOpen(false)}
               >
                 Product
               </Link>
-              <div className={styles.mobileDivider}>Solutions</div>
-              {solutions.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`${styles.mobileLinkIndented} ${isActiveLink(item.href) ? styles.mobileLinkActive : ''}`}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
               <div className={styles.mobileDivider}>Industries</div>
               {industries.map((item) => (
                 <Link
@@ -240,6 +210,13 @@ export default function MarketingNav() {
                   {item.label}
                 </Link>
               ))}
+              <Link
+                href="/industries"
+                className={`${styles.mobileLinkIndented} ${styles.mobileLinkViewAll}`}
+                onClick={() => setMobileOpen(false)}
+              >
+                View all →
+              </Link>
               <Link
                 href="/pricing"
                 className={`${styles.mobileLink} ${isActiveLink('/pricing') ? styles.mobileLinkActive : ''}`}

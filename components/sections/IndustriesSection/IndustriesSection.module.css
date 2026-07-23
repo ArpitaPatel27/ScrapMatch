@@ -59,7 +59,11 @@
   /* Nothing extra needed — GlareHover handles hover */
 }
 
-/* ── CARD (rendered by GlareHover) ───────────────────────────── */
+.glareWrapper {
+  height: 100%;
+}
+
+/* ── CARD (rendered inside GlareHover, now a Link) ────────────── */
 .card {
   background: var(--color-bg-elevated);
   border: 1px solid var(--color-border);
@@ -69,7 +73,7 @@
   flex-direction: column;
   gap: var(--space-4);
   height: 100%;
-  cursor: default;
+  text-decoration: none;
   /* Left accent from --cat-color passed via cardWrapper */
   border-left: 3px solid var(--cat-color, var(--color-brand));
   transition:

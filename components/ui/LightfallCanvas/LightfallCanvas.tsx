@@ -65,9 +65,9 @@ export default function LightfallCanvas({ className = '' }: { className?: string
 
         if (alpha > 0.002) {
           const grad = c.createLinearGradient(s.x, s.y, s.x, s.y + s.len);
-          grad.addColorStop(0, `hsla(155, 40%, 25%, 0)`);
-          grad.addColorStop(0.5, `hsla(155, 40%, 32%, ${alpha})`);
-          grad.addColorStop(1, `hsla(40, 30%, 60%, 0)`);
+          grad.addColorStop(0, `hsla(155, 48%, 24%, 0)`);
+          grad.addColorStop(0.5, `hsla(155, 48%, 32%, ${alpha})`);
+          grad.addColorStop(1, `hsla(28, 44%, 50%, 0)`);
 
           c.beginPath();
           c.moveTo(s.x, s.y);

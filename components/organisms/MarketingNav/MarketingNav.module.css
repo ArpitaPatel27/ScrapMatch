@@ -149,6 +149,25 @@
 
 .dropdownSm { min-width: 180px; }
 
+.dropdownWide {
+  min-width: 320px;
+}
+
+.dropdownGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+
+.dropdownViewAll {
+  grid-column: 1 / -1;
+  color: var(--color-brand) !important;
+  font-weight: var(--font-weight-medium);
+  border-top: 1px solid var(--color-border-subtle);
+  margin-top: var(--space-1);
+  padding-top: var(--space-2);
+}
+
 .dropdownItem {
   display: flex;
   flex-direction: column;
@@ -309,6 +328,11 @@
               color var(--duration-fast) var(--ease-out);
 }
 .mobileLinkIndented:hover { background: var(--color-surface-1); color: var(--color-text-primary); }
+
+.mobileLinkViewAll {
+  color: var(--color-brand);
+  font-weight: var(--font-weight-medium);
+}
 
 .mobileCtas {
   display: flex;

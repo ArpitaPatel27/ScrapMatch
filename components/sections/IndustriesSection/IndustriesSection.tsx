@@ -2,59 +2,21 @@
 
 import React, { CSSProperties } from 'react';
 import { motion } from 'framer-motion';
-import { Layers, Box, FileText, FlaskConical, Building2, Cpu, Zap, Wrench } from 'lucide-react';
+import Link from 'next/link';
+import { Layers, Box, FileText, FlaskConical, Building2, Cpu, Zap, Wrench, Car, Package } from 'lucide-react';
 import GlareHover from '@/components/ui/GlareHover/GlareHover';
 import styles from './IndustriesSection.module.css';
 
 const industries = [
-  {
-    name: 'Steel & Metals',
-    icon: Zap,
-    desc: 'Steel offcuts, cast iron scrap, copper wire, aluminium extrusions',
-    color: 'hsl(220, 22%, 44%)',
-  },
-  {
-    name: 'Plastics',
-    icon: Box,
-    desc: 'HDPE regrind, PET flake, PP scrap, ABS waste',
-    color: 'hsl(200, 55%, 38%)',
-  },
-  {
-    name: 'Paper & Packaging',
-    icon: FileText,
-    desc: 'OCC cardboard, kraft paper, newsprint, tissue off-cuts',
-    color: 'hsl(35, 58%, 40%)',
-  },
-  {
-    name: 'Textiles',
-    icon: Layers,
-    desc: 'Cotton waste, polyester offcuts, fabric trimmings, yarn ends',
-    color: 'hsl(280, 35%, 42%)',
-  },
-  {
-    name: 'Chemicals',
-    icon: FlaskConical,
-    desc: 'Solvent residues, catalyst waste, chemical by-products',
-    color: 'hsl(160, 42%, 33%)',
-  },
-  {
-    name: 'Construction',
-    icon: Building2,
-    desc: 'Fly ash, slag, aggregate waste, steel rebar offcuts',
-    color: 'hsl(24, 58%, 38%)',
-  },
-  {
-    name: 'Electronics',
-    icon: Cpu,
-    desc: 'PCB scrap, cable waste, component stock, E-waste',
-    color: 'hsl(155, 42%, 28%)',
-  },
-  {
-    name: 'Industrial Rubber',
-    icon: Wrench,
-    desc: 'Rubber buffings, tyre crumb, conveyor belt offcuts, seal waste',
-    color: 'hsl(30, 28%, 35%)',
-  },
+  { name: 'Steel & Metals',    slug: 'steel',        icon: Zap,         desc: 'Steel offcuts, cast iron scrap, copper wire, aluminium extrusions', color: 'hsl(210, 45%, 42%)' },
+  { name: 'Plastics',          slug: 'plastics',     icon: Box,         desc: 'HDPE regrind, PET flake, PP scrap, ABS waste', color: 'hsl(260, 38%, 48%)' },
+  { name: 'Paper & Packaging', slug: 'paper',        icon: FileText,    desc: 'OCC cardboard, kraft paper, newsprint, tissue off-cuts', color: 'hsl(35, 58%, 40%)' },
+  { name: 'Textiles',          slug: 'textiles',     icon: Layers,      desc: 'Cotton waste, polyester offcuts, fabric trimmings, yarn ends', color: 'hsl(340, 45%, 45%)' },
+  { name: 'Chemicals',         slug: 'chemicals',    icon: FlaskConical,desc: 'Solvent residues, catalyst waste, chemical by-products', color: 'hsl(55, 55%, 38%)' },
+  { name: 'Construction',      slug: 'construction', icon: Building2,   desc: 'Fly ash, slag, aggregate waste, steel rebar offcuts', color: 'hsl(15, 45%, 38%)' },
+  { name: 'Electronics',       slug: 'electronics',  icon: Cpu,         desc: 'PCB scrap, cable waste, component stock, E-waste', color: 'hsl(155, 48%, 24%)' },
+  { name: 'Automotive',        slug: 'automotive',   icon: Car,         desc: 'Stamping offcuts, coolant waste, rubber trim, battery scrap', color: 'hsl(220, 42%, 40%)' },
+  { name: 'Packaging',         slug: 'packaging',    icon: Package,     desc: 'Corrugated board, stretch film, BOPP, aluminium foil', color: 'hsl(295, 35%, 42%)' },
 ];
 
 function IndustriesSection() {
@@ -73,7 +35,7 @@ function IndustriesSection() {
             Whatever your industry produces,<br />ScrapMatch finds it a buyer.
           </h2>
           <p className={styles.subheadline}>
-            We work with manufacturers across 8 major industrial sectors.
+            We work with manufacturers across 9 major industrial sectors.
           </p>
         </motion.div>
 
@@ -90,12 +52,14 @@ function IndustriesSection() {
                 className={styles.cardWrapper}
                 style={{ '--cat-color': industry.color } as CSSProperties}
               >
-                <GlareHover className={styles.card}>
-                  <div className={styles.iconWrapper} style={{ backgroundColor: industry.color + '1a' }}>
-                    <Icon size={22} style={{ color: industry.color }} strokeWidth={1.5} />
-                  </div>
-                  <h3 className={styles.cardTitle}>{industry.name}</h3>
-                  <p className={styles.cardDesc}>{industry.desc}</p>
+                <GlareHover className={styles.glareWrapper}>
+                  <Link href={`/industries/${industry.slug}`} className={styles.card}>
+                    <div className={styles.iconWrapper} style={{ backgroundColor: industry.color + '1a' }}>
+                      <Icon size={22} style={{ color: industry.color }} strokeWidth={1.5} />
+                    </div>
+                    <h3 className={styles.cardTitle}>{industry.name}</h3>
+                    <p className={styles.cardDesc}>{industry.desc}</p>
+                  </Link>
                 </GlareHover>
               </motion.div>
             );
