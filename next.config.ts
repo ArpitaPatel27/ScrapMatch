@@ -1,18 +1,24 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  // Allow CSS imports from outside app/ directory (design-system tokens)
-  // This is enabled by default in Next.js 14+
-  
-  // Strict mode for React
   reactStrictMode: true,
 
-  // Image domains (for future use)
   images: {
-    remotePatterns: [],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.pexels.com',
+        pathname: '/**',
+      },
+    ],
+    // Quality and format optimization
+    formats: ['image/avif', 'image/webp'],
   },
-
-  // No need for experimental CSS here since Next.js 14 handles it natively
 };
 
 export default nextConfig;

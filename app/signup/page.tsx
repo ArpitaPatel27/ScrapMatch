@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -174,6 +175,18 @@ export default function SignupPage() {
     <div className={styles.container}>
       {/* ── LEFT PANEL ──────────────────────────────────────── */}
       <div className={styles.leftPanel}>
+        {/* Background industrial image */}
+        <div className={styles.leftBgImage}>
+          <Image
+            src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=900&q=75&auto=format&fit=crop"
+            alt="Industrial manufacturing and circular economy"
+            fill
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+            sizes="42vw"
+            priority
+          />
+          <div className={styles.leftBgOverlay} />
+        </div>
         <div className={styles.leftInner}>
           {/* Logo */}
           <div className={styles.logo}>

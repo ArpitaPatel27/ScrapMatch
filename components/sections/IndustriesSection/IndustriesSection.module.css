@@ -47,77 +47,111 @@
 }
 
 /* ── GRID ─────────────────────────────────────────────────────── */
-/* 7 cards: 4 top row, 3 bottom row centred */
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-4);
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
 }
 
-/* ── CARD WRAPPER (for motion) ────────────────────────────────── */
+/* ── CARD WRAPPER ─────────────────────────────────────────────── */
 .cardWrapper {
-  /* Nothing extra needed — GlareHover handles hover */
+  /* Nothing extra — motion wrapper */
 }
 
-.glareWrapper {
-  height: 100%;
-}
-
-/* ── CARD (rendered inside GlareHover, now a Link) ────────────── */
+/* ── CARD (Link element) ──────────────────────────────────────── */
 .card {
-  background: var(--color-bg-elevated);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  padding: var(--space-6);
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
-  height: 100%;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
   text-decoration: none;
-  /* Left accent from --cat-color passed via cardWrapper */
-  border-left: 3px solid var(--cat-color, var(--color-brand));
+  background: var(--color-bg-elevated);
   transition:
     transform var(--duration-base) var(--ease-spring),
     box-shadow var(--duration-base) var(--ease-out),
     border-color var(--duration-fast) var(--ease-out);
+  /* Bottom accent from --cat-color */
+  border-bottom: 3px solid var(--cat-color, var(--color-brand));
+  height: 100%;
 }
 
 .card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-border-strong);
 }
 
-/* ── ICON ─────────────────────────────────────────────────────── */
-.iconWrapper {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-lg);
+/* ── CARD IMAGE ───────────────────────────────────────────────── */
+.cardImageWrap {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--color-surface-2);
+}
+
+/* Zoom on hover */
+.card:hover .cardImageWrap img {
+  transform: scale(1.06) !important;
+}
+
+.cardImageWrap img {
+  transition: transform 0.55s var(--ease-smooth) !important;
+}
+
+/* Subtle dark-to-transparent gradient at bottom for chip readability */
+.cardImageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 40%,
+    hsla(215, 30%, 6%, 0.45) 100%
+  );
+  pointer-events: none;
+}
+
+/* Category chip overlaid on image */
+.categoryChip {
+  position: absolute;
+  bottom: var(--space-3);
+  left: var(--space-3);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.03em;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* ── CARD BODY ────────────────────────────────────────────────── */
+.cardBody {
+  padding: var(--space-5) var(--space-5) var(--space-4);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  color: hsl(0, 0%, 100%);
-  flex-shrink: 0;
-  opacity: 0.9;
-}
-
-.icon {
-  width: 20px;
-  height: 20px;
-  stroke-width: 1.5;
-}
-
-.cardTitle {
-  font-size: var(--text-base);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
-  margin: 0;
+  flex-direction: column;
+  gap: var(--space-3);
+  flex: 1;
 }
 
 .cardDesc {
   font-size: var(--text-sm);
   color: var(--color-text-secondary);
-  line-height: 1.6;
+  line-height: 1.55;
   margin: 0;
+  flex: 1;
+}
+
+.cardCta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1-5);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--cat-color, var(--color-brand));
+  transition: gap var(--duration-fast) var(--ease-out);
+}
+
+.card:hover .cardCta {
+  gap: var(--space-2-5);
 }
 
 /* ── RESPONSIVE ───────────────────────────────────────────────── */
@@ -127,7 +161,7 @@
 }
 
 @media (max-width: 768px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
+  .grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
 }
 
 @media (max-width: 480px) {

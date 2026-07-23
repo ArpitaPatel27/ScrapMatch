@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Zap, CheckCircle2, Eye, EyeOff, Loader2 } from 'lucide-react';
@@ -54,6 +55,18 @@ export default function LoginPage() {
     <div className={styles.container}>
       {/* ── LEFT BRAND PANEL ─────────────────────────────────── */}
       <div className={styles.leftPanel}>
+        {/* Background industrial image */}
+        <div className={styles.leftBgImage}>
+          <Image
+            src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=900&q=75&auto=format&fit=crop"
+            alt="Industrial manufacturing facility"
+            fill
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+            sizes="45vw"
+            priority
+          />
+          <div className={styles.leftBgOverlay} />
+        </div>
         <div className={styles.leftInner}>
           {/* Logo */}
           <div className={styles.logo}>

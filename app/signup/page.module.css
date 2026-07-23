@@ -28,20 +28,27 @@
   width: 42%;
   flex-shrink: 0;
   background-color: var(--color-brand);
-  background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
-  background-size: 26px 26px;
   padding: var(--space-16) var(--space-12);
   color: var(--color-text-inverse);
   position: relative;
   overflow: hidden;
 }
 
-.leftPanel::before {
-  content: '';
+/* Background image */
+.leftBgImage {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 80% 80% at 50% 115%, rgba(0,0,0,0.16) 0%, transparent 70%);
-  pointer-events: none;
+}
+
+/* Dark overlay for legibility */
+.leftBgOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    hsla(155, 60%, 12%, 0.90) 0%,
+    hsla(155, 55%, 8%, 0.80) 100%
+  );
 }
 
 @media (min-width: 1024px) {
