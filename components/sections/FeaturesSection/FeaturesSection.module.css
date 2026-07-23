@@ -343,6 +343,7 @@
 @media (max-width: 1024px) {
   .bento { grid-template-columns: repeat(2, 1fr); }
   .cellLarge { grid-column: span 2; }
+  .cellFull  { grid-column: span 2; }
   .cellSm    { grid-column: span 1; }
   .container { padding: 0 var(--space-6); }
 }
@@ -350,6 +351,359 @@
 @media (max-width: 640px) {
   .bento { grid-template-columns: 1fr; }
   .cellLarge { grid-column: span 1; }
+  .cellFull  { grid-column: span 1; }
   .cellSm    { grid-column: span 1; }
   .cardLarge { min-height: auto; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   FULL-WIDTH CELL
+════════════════════════════════════════════════════════════════ */
+.cellFull {
+  grid-column: span 4;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   LIVE DEAL FLOW — pipeline animation
+════════════════════════════════════════════════════════════════ */
+.pipeline {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-7) var(--space-8) var(--space-7);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle top accent stripe */
+.pipeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--color-brand) 0%,
+    hsl(155, 60%, 46%) 50%,
+    var(--color-accent) 100%
+  );
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+/* ── top bar ── */
+.pipelineTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.pipelineMeta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.pipelineEyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+}
+
+.pipelineTitle {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+}
+
+.pipelineControls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.pipelinePlayBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2-5) var(--space-5);
+  background: var(--color-brand);
+  color: var(--color-text-inverse);
+  border: none;
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  box-shadow: var(--shadow-brand);
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    transform var(--duration-base) var(--ease-spring);
+}
+
+.pipelinePlayBtn:hover {
+  background: var(--color-brand-hover);
+  box-shadow: var(--shadow-brand-lg);
+  transform: translateY(-1px);
+}
+
+.pipelinePlayBtnStop {
+  background: var(--color-surface-2);
+  color: var(--color-text-secondary);
+  box-shadow: none;
+}
+.pipelinePlayBtnStop:hover {
+  background: var(--color-surface-2);
+  box-shadow: none;
+  transform: none;
+}
+
+.pipelineResetBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: var(--color-surface-1);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+.pipelineResetBtn:hover {
+  color: var(--color-text-primary);
+  border-color: var(--color-border-strong);
+}
+
+/* ── pipeline track ── */
+.pipelineTrack {
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: var(--space-2) 0;
+}
+.pipelineTrack::-webkit-scrollbar { display: none; }
+
+.pipelineStageWrap {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── connector ── */
+.pipelineConn {
+  flex: 1;
+  position: relative;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  min-width: var(--space-6);
+  padding: 0 var(--space-1);
+}
+
+.pipelineConnBase {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.pipelineConnFill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-brand);
+  border-radius: var(--radius-full);
+  top: 50%;
+  transform: translateY(-50%) scaleX(0);
+  transform-origin: left;
+}
+
+/* ── node column ── */
+.pipelineNodeCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+/* ── node button ── */
+.pipelineNode {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-border);
+  background: var(--color-bg-elevated);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+  flex-shrink: 0;
+}
+
+.pipelineNode:hover {
+  border-color: var(--nc, var(--color-brand));
+  background: var(--nb, var(--color-brand-muted));
+  color: var(--nc, var(--color-brand));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--nc, var(--color-brand)) 14%, transparent);
+}
+
+.pipelineNodeActive {
+  background: var(--nb, var(--color-brand-muted));
+  border-color: var(--nc, var(--color-brand));
+  color: var(--nc, var(--color-brand));
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--nc, var(--color-brand)) 16%, transparent),
+    0 4px 14px color-mix(in srgb, var(--nc, var(--color-brand)) 22%, transparent);
+}
+
+.pipelineNodeDone {
+  background: var(--nb, var(--color-brand-muted));
+  border-color: var(--nc, var(--color-brand));
+  color: var(--nc, var(--color-brand));
+  opacity: 0.85;
+}
+
+/* pulse ring */
+.pipelinePulse {
+  position: absolute;
+  inset: -2px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--nc, var(--color-brand));
+  pointer-events: none;
+}
+
+.pipelineLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-align: center;
+  white-space: nowrap;
+  transition: color var(--duration-fast) var(--ease-out);
+  letter-spacing: 0.01em;
+}
+
+/* ── detail / card ── */
+.pipelineDetail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-height: 90px;
+}
+
+.pipelineCard {
+  display: flex;
+  align-items: stretch;
+  background: var(--color-surface-1);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.pipelineCardAccent {
+  width: 4px;
+  flex-shrink: 0;
+}
+
+.pipelineCardInner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  flex: 1;
+}
+
+.pipelineCardIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pipelineCardText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1-5);
+}
+
+.pipelineCardTitle {
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: -0.01em;
+}
+
+.pipelineCardBody {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+}
+
+.pipelineCardMeta {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-brand);
+  font-family: var(--font-mono);
+}
+
+/* hint */
+.pipelineHint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 90px;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  text-align: center;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  line-height: var(--leading-relaxed);
+}
+.pipelineHint strong { color: var(--color-brand); }
+
+/* success banner */
+.pipelineSuccess {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  background: var(--color-brand-muted);
+  border: 1px solid var(--color-brand-border);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-brand);
+  font-family: var(--font-mono);
 }
